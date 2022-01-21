@@ -14,14 +14,14 @@ while len(no_hosts)>0:
     team=(random.sample(hosts, 1)[0], random.sample(no_hosts, 1)[0])
     hosts.remove(team[0])
     no_hosts.remove(team[1])
-    df['Team'].loc[df.Name.isin(team)]=f'team#{count}'
+    df['Team'].loc[df.Name.isin(team)]=int(count)
     count+=1
 
 while len(hosts) > 0:
     team=random.sample(hosts, 2)
     hosts.remove(team[0])
     hosts.remove(team[1])
-    df['Team'].loc[df.Name.isin(team)]=f'team#{count}'
+    df['Team'].loc[df.Name.isin(team)]=int(count)
     count+=1
 
 df['course']=''
@@ -31,6 +31,15 @@ for course in courses:
     dish=random.sample(teams, int(len(df)/2/len(courses)))
     [teams.remove(team) for team in dish]
     df['course'].loc[df.Team.isin(dish)]=f'{course}'
+
+df['course']=''
+courses=['starters', 'main', 'dessert']
+teams=list(set(df['Team']))
+for course in courses:
+    dish=teams[0:5]
+    [teams.remove(team) for team in dish]
+    df['course'].loc[df.Team.isin(dish)]=f'{course}'
+
 
 starter_guests_main=list(set(df['Team'][df['course']=='main']))
 starter_guests_dessert=list(set(df['Team'][df['course']=='dessert']))
@@ -42,21 +51,37 @@ for hoster in list(set(df['Team'][df['course']=='starters'])):
             hoster)
     df['starters_id'].loc[df.Team.isin(guests)]=f'starter#{count}'
     count+=1
-    
-main_guests_starter=list(set(df['Team'][df['course']=='starters']))
-main_guests_dessert=list(set(df['Team'][df['course']=='dessert']))
+
+starter_guests_main=list(set(df['Team'][df['course']=='main']))
+starter_guests_dessert=list(set(df['Team'][df['course']=='dessert']))
+starter_guests_main=[starter_guests_main[-1]] + starter_guests_main[:-1]
+starter_guests_dessert=[starter_guests_dessert[-1]] + starter_guests_dessert[:-1]
+starter_guests_dessert=[starter_guests_dessert[-1]] + starter_guests_dessert[:-1]
+
+count=1
+df['main_id']=''
+for hoster in list(set(df['Team'][df['course']=='main'])):
+    guests=(starter_guests_main.pop(0), starter_guests_dessert.pop(0), hoster)
+    df['main_id'].loc[df.Team.isin(guests)]=f'main#{count}'
+    count+=1
+
+
 df['main_id']=''
 count=1
 for hoster in list(set(df['Team'][df['course']=='main'])):
     hoster_id=df['starters_id'][df['Team']==hoster].iloc[0]
     fmgs=[guest for guest in list(set(df['Team'][df['starters_id']!=hoster_id].loc[df.Team.isin(main_guests_starter)]))]
     fmgd=[guest for guest in list(set(df['Team'][df['starters_id']!=hoster_id].loc[df.Team.isin(main_guests_dessert)]))]
-    guests=(fmgs.pop(0), fmgd.pop(0), hoster)
+    guests=(fmgs.pop(-1), fmgd.pop(-1), hoster)
+    print(f'round: {count} fmgs: {fmgs}')
+    print(f'round: {count} fmgd: {fmgd}')
     main_guests_starter.remove(guests[0])
     main_guests_dessert.remove(guests[1])
+    print(f'round: {count} main_guests_starter: {main_guests_starter}')
+    print(f'round: {count} main_guests_dessert: {main_guests_dessert}')
     df['main_id'].loc[df.Team.isin(guests)]=f'main#{count}'
     count+=1
-    
+   
 dessert_guests_starter=list(set(df['Team'][df['course']=='starters']))
 dessert_guests_main=list(set(df['Team'][df['course']=='main']))
 df['dessert_id']=''
@@ -78,6 +103,7 @@ for hoster in list(set(df['Team'][df['course']=='dessert'])):
     df['dessert_id'].loc[df.Team.isin(guests)]=f'dessert#{count}'
     count+=1
     
+
 
 # match with other-course teams
  # filter on course 
