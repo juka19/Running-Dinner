@@ -1,10 +1,13 @@
 import pandas as pd
 import random
+from sklearn.utils import shuffle
 
-df=pd.read_csv("data/example_file.csv", sep=";")
+df_prep=pd.read_csv("data/example_file.csv", sep=";")
 
-rest=len(df)%6
-df=df[:len(df)-rest]
+df_prep=shuffle(df_prep).reset_index(drop=True) # randomizes the people that are assigned to the 3-people teams
+n_rest=len(df_prep)%6
+df=df_prep[:len(df_prep)-n_rest]
+rest=df_prep[len(df):len(df_prep)]
 
 n_participants=len(df)
 n_teams=n_participants//2
@@ -53,5 +56,30 @@ dessert=main_df['guest_dessert'].to_list()[-2:] + main_df['guest_dessert'].to_li
 
 dessert_df=pd.DataFrame(list(zip(guest_starters, guest_main, dessert)),
                          columns=['guest_starters', 'guest_main', 'dessert'])
-dessert_df
+
+
+course_groups={'starters_group': starters_df.apply(tuple, axis=1), 'main_group': main_df.apply(tuple, axis=1), 'dessert_group': dessert_df.apply(tuple, axis=1)}
+
+for course in course_groups.keys():
+    df[course]=''
+    for team in list(set(df['Team'])):
+        for dining_group in course_groups[course]:
+            if team in dining_group:
+                df[course][df['Team']==team]=f'{dining_group}'
+
+rest['Team']=''
+rest['course']=''
+rest['starters_group']=''
+rest['main_group']=''
+rest['dessert_group']=''
+for index in rest.index.values:
+    random_team=random.choice(df['Team'].unique()[df['Team'].value_counts() <= 2])
+    rest['Team'].loc[index]=random_team
+    rest['course'].loc[index]=df['course'][df['Team'] == random_team].iloc[0]
+    rest['starters_group'].loc[index]=df['starters_group'][df['Team'] == random_team].iloc[0]
+    rest['main_group'].loc[index]=df['main_group'][df['Team'] == random_team].iloc[0]
+    rest['dessert_group'].loc[index]=df['dessert_group'][df['Team'] == random_team].iloc[0]
+
+df=pd.concat([df, rest]).sort_values('Team')
+
 
