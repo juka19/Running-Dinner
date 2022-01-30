@@ -1,32 +1,32 @@
 Name;Email;host;address;allergies/preferences
-random1;;yes;;vegan
-random2;;yes;;vegan
-random3;;yes;;vegan
-random4;;yes;;no alcohol
-random5;;yes;;no alcohol
-random6;;yes;;no peanuts
-random7;;yes;;gluten free
-random8;;yes;;lactose intolerant
-random9;;yes;;
-random10;;yes;;
-random11;;yes;;
-random12;;yes;;
-random13;;yes;;
-random14;;yes;;
-random15;;yes;;
-random16;;yes;;
-random17;;yes;;
-random18;;no;;
-random19;;no;;
-random20;;no;;
-random21;;no;;
-random22;;no;;
-random23;;no;;
-random24;;no;;
-random25;;no;;
-random26;;no;;
-random27;;no;;
-random28;;no;;
-random29;;no;;
-random30;;no;;
-random31;;no;;no algae and no fish
+random1;julian.kath@posteo.de;yes;;vegan
+random2;random_email;yes;;vegan
+random3;random_email;yes;;vegan
+random4;random_email;yes;;no alcohol
+random5;random_email;yes;;no alcohol
+random6;random_email;yes;;no peanuts
+random7;random_email;yes;;gluten free
+random8;random_email;yes;;lactose intolerant
+random9;random_email;yes;;
+random10;random_email;yes;;
+random11;random_email;yes;;
+random12;random_email;yes;;
+random13;random_email;yes;;
+random14;random_email;yes;;
+random15;random_email;yes;;
+random16;random_email;yes;;
+random17;random_email;yes;;
+random18;random_email;no;;
+random19;random_email;no;;
+random20;random_email;no;;
+random21;random_email;no;;
+random22;random_email;no;;
+random23;random_email;no;;
+random24;random_email;no;;
+random25;random_email;no;;
+random26;random_email;no;;
+random27;random_email;no;;
+random28;random_email;no;;
+random29;random_email;no;;
+random30;random_email;no;;
+random31;random_email;no;;no algae and no fish
