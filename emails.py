@@ -2,9 +2,10 @@ from pickle import load
 import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from pandas import isnull
 
 with open('data/participants_df.pickle', 'rb') as handle:
-    df = load(handle)
+    df=load(handle)
     
 
 name=df[df["Name"]=="random1"]["Name"].iloc[0]
@@ -22,7 +23,19 @@ def send_running_dinner_email(name):
     
     # A few variables for adapting the text. Essentially these should be logical tests, wheter certain conditions are met
     
-    dinner_prep='' # I would already create a whole text block here rather than just extracting just the allergy, and then piece the whole text together
+    if course=="starters":
+        guests=tuple(map(int, df[df["Team"]==team]['starters_group'].iloc[0].replace('(', '').replace(')', '').split(', ')))
+    elif course=="main":
+        guests=tuple(map(int, df[df["Team"]==team]['main_group'].iloc[0].replace('(', '').replace(')', '').split(', ')))
+    elif course=='dessert':
+        guests=tuple(map(int, df[df["Team"]==team]['dessert_group'].iloc[0].replace('(', '').replace(')', '').split(', ')))
+    
+    allergy_list = []
+    [[allergy_list.append(allergy) for allergy in df[df["Team"]==guest]['allergies/preferences'].tolist()] for guest in guests]
+    allergy_list = list(set([element for element in allergy_list if ~isnull(element) and isinstance(element, float) != True]))
+    
+    
+    dinner_prep= '' # I would already create a whole text block here rather than just extracting just the allergy, and then piece the whole text together
     address1='' # Same for this. Notice that the address will obviously not always be the same one!
     address2=''
     hosting_7='' # Variable for hosting more than 6 people. Also we should probably somehow write a test for whether there are dinners with even more people
