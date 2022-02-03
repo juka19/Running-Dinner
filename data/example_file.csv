@@ -1,32 +1,32 @@
 Name;Email;host;address;allergies/preferences
-random1;julian.kath@posteo.de;yes;;vegan
-random2;random_email;yes;;vegan
-random3;random_email;yes;;vegan
-random4;random_email;yes;;no alcohol
-random5;random_email;yes;;no alcohol
-random6;random_email;yes;;no peanuts
-random7;random_email;yes;;gluten free
-random8;random_email;yes;;lactose intolerant
-random9;random_email;yes;;
-random10;random_email;yes;;
-random11;random_email;yes;;
-random12;random_email;yes;;
-random13;random_email;yes;;
-random14;random_email;yes;;
-random15;random_email;yes;;
-random16;random_email;yes;;
-random17;random_email;yes;;
-random18;random_email;no;;
-random19;random_email;no;;
-random20;random_email;no;;
-random21;random_email;no;;
-random22;random_email;no;;
-random23;random_email;no;;
-random24;random_email;no;;
-random25;random_email;no;;
-random26;random_email;no;;
-random27;random_email;no;;
-random28;random_email;no;;
-random29;random_email;no;;
-random30;random_email;no;;
-random31;random_email;no;;no algae and no fish
+Julian;julian.kath@posteo.de;yes;address1;vegan
+Katalin;katasbayer@gmail.com;yes;address2;vegan
+Hannah;hannahschweren@gmail.com;yes;address3;vegan
+Francesca;francescagiacco1@gmail.com;yes;address4;no alcohol
+random5;random_email;yes;address5;no alcohol
+random6;random_email;yes;address6;no peanuts
+random7;random_email;yes;address7;gluten free
+random8;random_email;yes;address8;lactose intolerant
+random9;random_email;yes;address9;
+random10;random_email;yes;address10;
+random11;random_email;yes;address11;
+random12;random_email;yes;address12;
+random13;random_email;yes;address13;
+random14;random_email;yes;address14;
+random15;random_email;yes;address15;
+random16;random_email;yes;address16;
+random17;random_email;yes;address17;
+random18;random_email;no;address18;
+random19;random_email;no;address19;
+random20;random_email;no;address20;
+random21;random_email;no;address21;
+random22;random_email;no;address22;
+random23;random_email;no;address23;
+random24;random_email;no;address24;
+random25;random_email;no;address25;
+random26;random_email;no;address26;
+random27;random_email;no;address27;
+random28;random_email;no;address28;
+random29;random_email;no;address29;
+random30;random_email;no;address30;
+random31;random_email;no;address31;no algae and no fish
