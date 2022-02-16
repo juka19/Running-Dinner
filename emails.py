@@ -122,7 +122,7 @@ def send_running_dinner_email(name):
 
 
 port=465
-password='mdsrunningdinner'
+password=''
 context=ssl.create_default_context()
 
 names=["Francesca", "Katalin", "Hannah", "Julian"]
